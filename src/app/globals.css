@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  --ground: #0a0b0d;
+  --panel: #121417;
+  --panel-2: #171a1e;
+  --line: #23282e;
+  --line-bright: #333a42;
+  --steel: #8a9199;
+  --steel-dim: #5a6169;
+  --chalk: #e9ecef;
+  --signal: #d6202e;
+  --cyan: #3fd9e0;
+  --amber: #f2a93b;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--line);
+  --color-line-bright: var(--line-bright);
+  --color-steel: var(--steel);
+  --color-steel-dim: var(--steel-dim);
+  --color-chalk: var(--chalk);
+  --color-signal: var(--signal);
+  --color-cyan: var(--cyan);
+  --color-amber: var(--amber);
+  --font-display: var(--font-archivo);
+  --font-mono: var(--font-jbmono);
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--ground);
+}
+
+body {
+  background: var(--ground);
+  color: var(--chalk);
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* --- typography helpers --- */
+.mono {
+  font-family: var(--font-jbmono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  font-family: var(--font-jbmono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--steel-dim);
+}
+
+.display {
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+
+/* --- the engineering grid ground --- */
+.grid-ground {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* --- focus --- */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--signal);
+  color: #fff;
+}
+
+/* --- scrollbar --- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--ground); }
+::-webkit-scrollbar-thumb { background: var(--line-bright); }
+::-webkit-scrollbar-thumb:hover { background: var(--steel-dim); }
+
+/* --- draw-in for svg strokes --- */
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes blink {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0.15; }
+  100% { opacity: 1; }
+}
+.blink { animation: blink 2.4s steps(1, end) infinite; }
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(400%); }
+}
+
+/* --- reduced motion: kill every loop, keep every layout --- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .blink { animation: none; opacity: 1; }
+}
