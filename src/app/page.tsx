@@ -77,8 +77,10 @@ export default function Home() {
 
         {/* 01 — Formula SAE */}
         <Section {...S.fsae} sheet={1} total={TOTAL}>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)]">
-            <Toolpath nodes={FSAE_NODES} />
+          <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,400px)_minmax(0,1fr)]">
+            <div className="lg:sticky lg:top-24">
+              <Toolpath nodes={FSAE_NODES} />
+            </div>
             <div>
               <Gallery photos={S.fsae.photos.slice(0, 4)} cols={2} />
               <h3 className="mono mt-12 mb-4 border-b border-line pb-2 text-[10px] tracking-[0.2em] text-signal uppercase">
@@ -191,13 +193,11 @@ export default function Home() {
 
         {/* 07 — Maintenance */}
         <Section {...S.maintenance} sheet={7} total={TOTAL}>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)]">
-            <Reveal>
-              <LinkageCycle />
-            </Reveal>
-            <Reveal delay={100}>
-              <Gallery photos={S.maintenance.photos} cols={2} />
-            </Reveal>
+          <Reveal>
+            <LinkageCycle />
+          </Reveal>
+          <div className="mt-12">
+            <Gallery photos={S.maintenance.photos} cols={2} />
           </div>
         </Section>
 

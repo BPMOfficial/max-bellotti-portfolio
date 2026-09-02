@@ -13,26 +13,33 @@ const X1 = 910;
 const CY = H / 2;
 const STOCK = 74;
 
+/**
+ * A two-step shaft: collar, shoulder, shank, then the finished journal held for
+ * the last of the pass. TARGET is sized so the readout arrives at the real
+ * called-out dimension by cutting to it, rather than snapping to it at the end.
+ */
+const TARGET_IN = 0.5282;
+const STOCK_IN = 0.748;
+const TARGET = (TARGET_IN / STOCK_IN) * STOCK; // half-height in canvas units
+
 function profileAt(x: number): number {
-  // a stepped, turned part — collar, shank, relief, nose chamfer
   const t = (x - X0) / (X1 - X0);
-  if (t < 0.14) return 70;
-  if (t < 0.2) return 70 - (t - 0.14) * (28 / 0.06); // shoulder
-  if (t < 0.52) return 42;
-  if (t < 0.58) return 42 - (t - 0.52) * (12 / 0.06);
-  if (t < 0.82) return 30;
-  if (t < 0.88) return 30 + (t - 0.82) * (10 / 0.06); // relief
-  if (t < 0.96) return 40 - (t - 0.88) * (14 / 0.08); // chamfer to nose
-  return 26;
+  if (t < 0.16) return 70;
+  if (t < 0.22) return 70 - (t - 0.16) * ((70 - 62) / 0.06); // shoulder
+  if (t < 0.52) return 62;
+  if (t < 0.6) return 62 - (t - 0.52) * ((62 - TARGET) / 0.08); // cut to size
+  return TARGET;
 }
 
 export function MaterialRemoval() {
   const wrap = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const reduced = useReducedMotion();
+  // the pass is monotonic: scrolling back up leaves the finished surface cut,
+  // because in the shop it would be
   const progress = useRef(0);
   const chips = useRef<Chip[]>([]);
-  const [readout, setReadout] = useState({ z: 0, d: 0.748 });
+  const [readout, setReadout] = useState({ z: 0, d: STOCK_IN });
 
   useEffect(() => {
     const el = wrap.current;
@@ -65,7 +72,7 @@ export function MaterialRemoval() {
       // passes 35% — a comfortable travel for a single scroll gesture
       const span = r.height + window.innerHeight * 0.45;
       const p = (window.innerHeight * 0.8 - r.top) / span;
-      progress.current = Math.max(0, Math.min(1, p));
+      progress.current = Math.max(progress.current, Math.max(0, Math.min(1, p)));
     };
     readProgress();
     window.addEventListener("scroll", readProgress, { passive: true });
@@ -101,10 +108,6 @@ export function MaterialRemoval() {
         }
       }
       if (cutX > lastCut) lastCut = cutX;
-      if (cutX < lastCut - 4) {
-        lastCut = cutX;
-        chips.current.length = 0;
-      }
 
       // --- integrate chips ---
       for (const c of chips.current) {
@@ -219,11 +222,9 @@ export function MaterialRemoval() {
       }
 
       const z = p * 3.2;
-      const dHere = (profileAt(cutX) / STOCK) * 0.748;
+      const dHere = (profileAt(cutX) / STOCK) * STOCK_IN;
       setReadout((r) =>
-        Math.abs(r.z - z) > 0.004 || Math.abs(r.d - dHere) > 0.0008
-          ? { z, d: p > 0.995 ? 0.5282 : dHere }
-          : r,
+        Math.abs(r.z - z) > 0.004 || Math.abs(r.d - dHere) > 0.0008 ? { z, d: dHere } : r,
       );
 
       if (visible && !reduced) raf = requestAnimationFrame(frame);
@@ -252,7 +253,7 @@ export function MaterialRemoval() {
         <span className="flex items-center gap-2">
           <span className="text-steel-dim">⌀</span>
           <span
-            className={`tabular-nums ${readout.d <= 0.5283 ? "text-signal" : "text-chalk"}`}
+            className={`tabular-nums ${readout.d <= TARGET_IN + 0.0002 ? "text-signal" : "text-chalk"}`}
           >
             {readout.d.toFixed(4)}
           </span>

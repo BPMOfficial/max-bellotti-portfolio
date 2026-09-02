@@ -60,12 +60,14 @@ export const SECTIONS: Section[] = [
     photos: [
       {
         src: "/img/fsae/suspension-brackets.jpg",
+        pos: "center 45%",
         alt: "Machined aluminium rocker and clevis brackets with a spherical rod end and carbon-fibre tie rod, hand-labelled left and right before assembly.",
         caption:
           "Machined aluminium rocker and clevis brackets with a spherical rod end and carbon-fibre tie rod, hand-labelled left / right before assembly.",
       },
       {
         src: "/img/fsae/tie-rods.jpg",
+        pos: "center 50%",
         alt: "Turned steel tie-rod shafts with threaded ends, cut on the manual lathe and matched as a pair.",
         caption:
           "Turned steel tie-rod shafts with threaded ends, cut on the manual lathe and matched as a pair.",
@@ -122,22 +124,26 @@ export const SECTIONS: Section[] = [
     photos: [
       {
         src: "/img/shop/lathe-facing.jpg",
+        pos: "center 76%",
         alt: "Advancing the carriage on a facing pass at the manual lathe.",
         caption: "Advancing the carriage on a facing pass.",
       },
       {
         src: "/img/shop/lathe-compound.jpg",
+        pos: "center 80%",
         alt: "Setting the compound and tool post with the tailstock centre engaged.",
         caption: "Setting the compound and tool post, tailstock centre engaged.",
       },
       {
         src: "/img/shop/bushings.jpg",
+        pos: "center 55%",
         alt: "A run of turned and bored steel bushings, drilled through and faced to length.",
         caption:
           "A run of turned and bored steel bushings, drilled through and faced to length.",
       },
       {
         src: "/img/shop/milled-part-5282.jpg",
+        pos: "center 45%",
         alt: "A milled and tapped part held against a hand-written dimension of 0.5282 inches.",
         caption:
           "A milled and tapped part checked against a hand-written dimension of .5282 in.",
@@ -150,18 +156,21 @@ export const SECTIONS: Section[] = [
       },
       {
         src: "/img/shop/mill-drilling.jpg",
+        pos: "center 26%",
         alt: "Drilling a clamped aluminium plate in the mill vise, chips clearing from the flutes.",
         caption:
           "Drilling a clamped aluminium plate in the mill vise, chips clearing from the flutes.",
       },
       {
         src: "/img/shop/mill-setup.jpg",
+        pos: "center 30%",
         alt: "A 5/16 inch setup on a steel block held in the vise, indicated true before the cut.",
         caption:
           "A 5/16 in setup on a steel block held in the vise, indicated true before the cut.",
       },
       {
         src: "/img/shop/hardpoint-blanks.jpg",
+        pos: "center 45%",
         alt: "Aluminium hardpoint blanks for the chassis, sawn and faced to size and stacked.",
         caption:
           "Aluminium hardpoint blanks for the chassis, sawn and faced to size and stacked for the next operation.",
@@ -515,7 +524,7 @@ export const SKILLS: { group: string; items: { name: string; tier: Tier; note?: 
       { name: "Manual lathe", tier: "certified", note: "iLabs qual · 11 Mar 2026" },
       { name: "Manual mill", tier: "certified", note: "iLabs qual · 10 Mar 2026" },
       { name: "Power tools", tier: "certified", note: "iLabs qual · 6 Feb 2026" },
-      { name: "Sandblasting & polishing", tier: "working" },
+      { name: "Sandblasting & polishing", tier: "certified" },
       { name: "Composite layup, ply cutting", tier: "working" },
     ],
   },

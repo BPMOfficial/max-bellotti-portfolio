@@ -5,12 +5,17 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export type Node = { code: string; when: string; text: string };
 
-const STEP = 118;
+const STEP = 104;
 const JOG = 46;
 
 /**
  * The section timeline drawn as a machining toolpath: a serpentine the cutter
  * runs down as you scroll, with each milestone a node it passes through.
+ *
+ * Progress is measured against the whole enclosing section rather than this
+ * block, so the pass paces with the section you are actually reading and
+ * finishes as you reach the end of it — the block itself is sticky, so the
+ * cutter stays on screen the whole way down.
  */
 export function Toolpath({ nodes }: { nodes: Node[] }) {
   const wrap = useRef<HTMLDivElement>(null);
@@ -24,14 +29,17 @@ export function Toolpath({ nodes }: { nodes: Node[] }) {
     if (reduced) return;
     const el = wrap.current;
     if (!el) return;
+    const track = el.closest("section") ?? el;
     let raf = 0;
     const read = () => {
       if (raf) return;
       raf = requestAnimationFrame(() => {
         raf = 0;
-        const r = el.getBoundingClientRect();
-        const span = r.height + window.innerHeight * 0.3;
-        setScrolled(Math.max(0, Math.min(1, (window.innerHeight * 0.78 - r.top) / span)));
+        const r = track.getBoundingClientRect();
+        const vh = window.innerHeight;
+        // p reaches 1 shortly before the section's bottom clears the viewport
+        const travel = Math.max(1, r.height - vh * 0.8);
+        setScrolled(Math.max(0, Math.min(1, (vh * 0.55 - r.top) / travel)));
       });
     };
     read();

@@ -65,7 +65,7 @@ export function FoilRise() {
           alt="The Navier N30 up on its foils on Lake Tahoe, hull fully clear of the water."
           fill
           sizes="(max-width:1024px) 100vw, 1100px"
-          className="object-cover"
+          className="object-cover object-[center_32%]"
         />
 
         <svg
@@ -76,22 +76,22 @@ export function FoilRise() {
           fill="none"
         >
           {/* waterline — falls away as the boat comes up */}
-          <g style={{ transform: `translateY(${p * 46}px)`, transition: "transform 120ms linear" }}>
-            <line x1="0" y1="416" x2="1000" y2="416" stroke="var(--cyan)" strokeWidth="1.5" opacity="0.7" />
-            <line x1="0" y1="416" x2="1000" y2="416" stroke="var(--cyan)" strokeWidth="6" opacity="0.12" />
+          <g style={{ transform: `translateY(${p * 40}px)`, transition: "transform 120ms linear" }}>
+            <line x1="0" y1="500" x2="1000" y2="500" stroke="var(--cyan)" strokeWidth="1.5" opacity="0.7" />
+            <line x1="0" y1="500" x2="1000" y2="500" stroke="var(--cyan)" strokeWidth="6" opacity="0.12" />
           </g>
 
           {/* ride-height dimension */}
           <g opacity={p > 0.25 ? 0.85 : 0} style={{ transition: "opacity 400ms" }}>
-            <line x1="120" y1="370" x2="120" y2={416 + p * 46} stroke="var(--amber)" strokeWidth="1" />
-            <path d="M120 370 l-4 8 h8 z" fill="var(--amber)" />
-            <path d={`M120 ${416 + p * 46} l-4 -8 h8 z`} fill="var(--amber)" />
-            <line x1="96" y1="370" x2="144" y2="370" stroke="var(--amber)" strokeWidth="1" opacity="0.6" />
+            <line x1="120" y1="432" x2="120" y2={500 + p * 40} stroke="var(--amber)" strokeWidth="1" />
+            <path d="M120 432 l-4 8 h8 z" fill="var(--amber)" />
+            <path d={`M120 ${500 + p * 40} l-4 -8 h8 z`} fill="var(--amber)" />
+            <line x1="96" y1="432" x2="144" y2="432" stroke="var(--amber)" strokeWidth="1" opacity="0.6" />
           </g>
 
           {/* accelerating flow past the struts */}
           <g stroke="var(--cyan)" strokeWidth="1.5" opacity={0.2 + p * 0.5}>
-            {[452, 478, 504, 530].map((y, i) => (
+            {[518, 532, 546, 558].map((y, i) => (
               <line
                 key={y}
                 x1="0"

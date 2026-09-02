@@ -92,7 +92,15 @@ export function IonPlume({ className = "" }: { className?: string }) {
       (cv.getContext("webgl", { alpha: true, premultipliedAlpha: true, antialias: false }) as
         | WebGLRenderingContext
         | null) ?? null;
-    if (!gl) return;
+    if (!gl || gl.isContextLost()) return;
+
+    // if the GPU drops the context, hide the canvas rather than leaving a
+    // stale or opaque surface sitting over the photograph
+    const onLost = (e: Event) => {
+      e.preventDefault();
+      cv.style.opacity = "0";
+    };
+    cv.addEventListener("webglcontextlost", onLost);
 
     const vs = compile(gl, gl.VERTEX_SHADER, VERT);
     const fs = compile(gl, gl.FRAGMENT_SHADER, FRAG);
@@ -142,6 +150,7 @@ export function IonPlume({ className = "" }: { className?: string }) {
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
+      if (cv.style.opacity !== "1") cv.style.opacity = "1";
     };
 
     if (reduced) {
@@ -172,8 +181,7 @@ export function IonPlume({ className = "" }: { className?: string }) {
     return () => {
       io.disconnect();
       if (raf) cancelAnimationFrame(raf);
-      const ext = gl.getExtension("WEBGL_lose_context");
-      ext?.loseContext();
+      cv.removeEventListener("webglcontextlost", onLost);
     };
   }, [reduced]);
 
@@ -182,7 +190,9 @@ export function IonPlume({ className = "" }: { className?: string }) {
       ref={ref}
       aria-hidden
       className={className}
-      style={{ mixBlendMode: "screen" }}
+      // starts invisible; the first successful frame reveals it. If WebGL is
+      // unavailable or fails, the photograph below simply shows through.
+      style={{ mixBlendMode: "screen", opacity: 0, transition: "opacity 500ms" }}
     />
   );
 }
