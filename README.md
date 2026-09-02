@@ -61,7 +61,7 @@ Two rules, applied everywhere:
 First time:
 
 1. Go to [vercel.com/new](https://vercel.com/new) and import
-   `MBellotti-1/max-bellotti-portfolio`
+   `BPMOfficial/max-bellotti-portfolio`
 2. Framework is auto-detected as Next.js — no environment variables, nothing to
    change
 3. Deploy
