@@ -55,17 +55,17 @@ export function Hero() {
         priority
         sizes="100vw"
         className="object-cover object-[63%_center] lg:object-center"
-        style={{ filter: "saturate(0.92) contrast(1.06) brightness(0.78)" }}
+        style={{ filter: "saturate(0.95) contrast(1.04) brightness(0.92)" }}
       />
 
       {/* grade — keeps type legible over a bright sky */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-t from-ground via-ground/55 to-ground/25 lg:via-ground/62 lg:to-ground/35"
+        className="absolute inset-0 bg-gradient-to-t from-ground via-ground/45 to-ground/15 lg:via-ground/50 lg:to-ground/22"
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-r from-ground/88 via-ground/25 to-ground/45"
+        className="absolute inset-0 bg-gradient-to-r from-ground/82 via-ground/12 to-ground/32"
       />
 
       {/* drafting overlay — lives in the sky above the car so it never
@@ -112,7 +112,7 @@ export function Hero() {
           always meets the block no matter how the photo crops */}
       <div
         aria-hidden
-        className="absolute right-8 top-[15%] z-[1] hidden w-[320px] lg:block"
+        className="absolute right-8 top-[15%] z-[1] hidden w-[352px] lg:block"
         style={{ opacity: lit ? 1 : 0, transition: "opacity 600ms 1250ms" }}
       >
         <svg
@@ -132,7 +132,7 @@ export function Hero() {
           />
           <circle cx="6" cy="274" r="4.5" fill="none" stroke="var(--amber)" strokeWidth="1.3" />
         </svg>
-        <div className="mono bg-ground/70 py-1 text-right text-[11px] leading-[1.75] tracking-[0.14em] uppercase backdrop-blur-[2px]">
+        <div className="mono bg-ground/70 px-3.5 py-1.5 text-right text-[11px] leading-[1.75] tracking-[0.14em] uppercase backdrop-blur-[2px]">
           <div className="text-amber">FSAE Michigan 2026</div>
           <div className="text-steel">1st overall · Global Formula Racing</div>
           <div className="text-steel-dim">DHBW Ravensburg / Oregon State</div>

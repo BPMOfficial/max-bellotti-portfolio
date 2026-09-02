@@ -27,7 +27,15 @@ export function Nav() {
         solid ? "border-b border-line bg-ground/85 backdrop-blur-md" : ""
       }`}
     >
-      <div className="mx-auto flex max-w-[1600px] items-center gap-4 px-5 py-3 md:px-8">
+      {/* before the bar goes solid the hero sky sits behind it, so carry a
+          scrim to keep the index legible */}
+      {!solid && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ground/90 via-ground/55 to-transparent"
+        />
+      )}
+      <div className="relative mx-auto flex max-w-[1600px] items-center gap-4 px-5 py-3 md:px-8">
         <a href="#top" className="group flex items-baseline gap-2.5">
           <span className="display text-[15px] tracking-tight text-chalk">
             MAX BELLOTTI

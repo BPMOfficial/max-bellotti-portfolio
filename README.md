@@ -13,9 +13,9 @@ and pinsetter maintenance — plus coursework, a software project and contact.
 - **`next/image`** handles AVIF/WebP conversion and responsive `srcset` for the
   ~60 photographs
 - **No animation library.** Every animation is hand-written: canvas 2D for the
-  turning pass, SVG for the mechanisms and drawing annotations, CSS transitions
-  for reveals, and one raw WebGL fragment shader for the ion plume. Runtime
-  dependencies are Next, React and React DOM — nothing else.
+  turning pass, SVG for the mechanisms and drawing annotations, and CSS
+  transitions for reveals. Runtime dependencies are Next, React and React
+  DOM — nothing else.
 
 ## Running it
 

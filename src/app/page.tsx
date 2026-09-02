@@ -12,7 +12,6 @@ import { MaterialRemoval } from "@/components/MaterialRemoval";
 import { DrawingSheet } from "@/components/DrawingSheet";
 import { BayonetPath } from "@/components/BayonetPath";
 import { FoilRise } from "@/components/FoilRise";
-import { IonPlume } from "@/components/IonPlume";
 import { GeometryReport } from "@/components/GeometryReport";
 import { LinkageCycle } from "@/components/LinkageCycle";
 import { SkillsDro } from "@/components/SkillsDro";
@@ -153,7 +152,7 @@ export default function Home() {
             <Reveal>
               <figure className="border border-line bg-panel">
                 <div className="mono flex flex-wrap items-center gap-x-5 gap-y-1 border-b border-line px-4 py-2.5 text-[10px] tracking-[0.16em] uppercase">
-                  <span className="text-signal">Hall effect thruster · plume</span>
+                  <span className="text-signal">Hall effect thruster</span>
                   <span className="ml-auto text-steel-dim">Vacuum chamber viewport</span>
                 </div>
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-black">
@@ -164,13 +163,11 @@ export default function Home() {
                     sizes="(max-width:1024px) 100vw, 700px"
                     className="object-cover"
                   />
-                  <IonPlume className="absolute inset-0 h-full w-full" />
                 </div>
                 <figcaption className="border-t border-line px-4 py-3 text-[12.5px] leading-relaxed text-steel-dim">
                   A plasma discharge running inside one of the lab&apos;s vacuum
                   chambers, between the Helmholtz coils on the optical breadboard.
-                  Photographed through the chamber viewport during a test run; the
-                  plume overlay is a shader, not part of the photograph.
+                  Photographed through the chamber viewport during a test run.
                 </figcaption>
               </figure>
             </Reveal>
